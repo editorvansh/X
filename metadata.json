@@ -1,0 +1,6 @@
+{
+  "name": "Akshar Tournament",
+  "description": "Free Fire Esports Tournament Platform with real-time registrations, match rooms, and leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

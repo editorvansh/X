@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account information and Free Fire player credentials.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Google UID matching request.auth.uid." },
+        "email": { "type": "string", "description": "User email address." },
+        "displayName": { "type": "string", "description": "Display name of the user." },
+        "photoUrl": { "type": "string", "description": "Profile picture URL." },
+        "inGameId": { "type": "string", "description": "Free Fire player UID number." },
+        "inGameName": { "type": "string", "description": "Free Fire in-game nickname." },
+        "role": { "type": "string", "description": "Role of the user: user or admin." },
+        "totalMatches": { "type": "integer", "description": "Total tournaments/matches played." },
+        "totalKills": { "type": "integer", "description": "Total kills accumulated." },
+        "totalWins": { "type": "integer", "description": "Total tournament wins." },
+        "totalPoints": { "type": "integer", "description": "Esports leaderboard points." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp." }
+      },
+      "required": ["userId", "email", "displayName", "createdAt"]
+    },
+    "Tournament": {
+      "title": "Tournament",
+      "description": "Free Fire tournament information, rules, schedule, slots, and match room status.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique tournament ID." },
+        "title": { "type": "string", "description": "Tournament title." },
+        "description": { "type": "string", "description": "Tournament description." },
+        "rules": { "type": "string", "description": "Match and gameplay rules." },
+        "gameTitle": { "type": "string", "description": "Free Fire MAX or Free Fire." },
+        "format": { "type": "string", "enum": ["Solo", "Duo", "Squad"], "description": "Match format." },
+        "map": { "type": "string", "description": "Map name like Bermuda, Purgatory, Kalahari." },
+        "scheduledAt": { "type": "string", "format": "date-time", "description": "Tournament start time." },
+        "registrationEnd": { "type": "string", "format": "date-time", "description": "Registration deadline." },
+        "maxSlots": { "type": "integer", "description": "Maximum capacity." },
+        "filledSlots": { "type": "integer", "description": "Current registered count." },
+        "entryFee": { "type": "integer", "description": "Entry fee in INR (0 for free MVP)." },
+        "prizePool": { "type": "integer", "description": "Total prize pool." },
+        "firstPrize": { "type": "integer", "description": "1st place prize." },
+        "secondPrize": { "type": "integer", "description": "2nd place prize." },
+        "thirdPrize": { "type": "integer", "description": "3rd place prize." },
+        "perKillPrize": { "type": "integer", "description": "Prize per kill." },
+        "status": { "type": "string", "enum": ["upcoming", "live", "completed", "cancelled"], "description": "Status." },
+        "roomId": { "type": "string", "description": "Private Free Fire Custom Room ID." },
+        "roomPassword": { "type": "string", "description": "Private Room password." },
+        "roomReleased": { "type": "boolean", "description": "Whether room details have been released by admin." },
+        "winnerName": { "type": "string", "description": "Name of winning team/player." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp." }
+      },
+      "required": ["id", "title", "format", "map", "maxSlots", "filledSlots", "status", "roomReleased", "createdAt"]
+    },
+    "Registration": {
+      "title": "Registration",
+      "description": "User tournament registration record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Registration ID." },
+        "tournamentId": { "type": "string", "description": "Associated tournament ID." },
+        "userId": { "type": "string", "description": "User Google UID." },
+        "playerDisplayName": { "type": "string", "description": "Player Google display name." },
+        "inGameId": { "type": "string", "description": "Free Fire player UID." },
+        "inGameName": { "type": "string", "description": "Free Fire in-game nickname." },
+        "teamName": { "type": "string", "description": "Team name for Duo/Squad." },
+        "teammates": { "type": "string", "description": "Teammates info." },
+        "status": { "type": "string", "enum": ["confirmed", "cancelled"], "description": "Registration status." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Registration timestamp." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp." }
+      },
+      "required": ["id", "tournamentId", "userId", "inGameId", "inGameName", "status", "createdAt"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Platform broadcast announcements and tournament updates.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Announcement ID." },
+        "title": { "type": "string", "description": "Headline." },
+        "content": { "type": "string", "description": "Body message." },
+        "tag": { "type": "string", "description": "Update, Notice, Winner, or Urgent." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Publication timestamp." }
+      },
+      "required": ["id", "title", "content", "createdAt"]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Player ranking entry for tournament leaderboard.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Leaderboard entry ID." },
+        "userId": { "type": "string", "description": "User ID." },
+        "playerName": { "type": "string", "description": "Player name." },
+        "inGameId": { "type": "string", "description": "Free Fire ID." },
+        "matchesPlayed": { "type": "integer", "description": "Matches played count." },
+        "kills": { "type": "integer", "description": "Kills count." },
+        "wins": { "type": "integer", "description": "Wins count." },
+        "totalPoints": { "type": "integer", "description": "Total ranking points." },
+        "rank": { "type": "integer", "description": "Leaderboard position." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Timestamp." }
+      },
+      "required": ["id", "playerName", "inGameId", "totalPoints", "rank"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profile and Free Fire gaming details."
+    },
+    "/tournaments/{tournamentId}": {
+      "schema": "Tournament",
+      "description": "Stores tournament schedules, formats, prize pools, and status."
+    },
+    "/registrations/{registrationId}": {
+      "schema": "Registration",
+      "description": "Tournament registration records linked to user and tournament."
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "System notices and tournament announcements."
+    },
+    "/leaderboards/{leaderboardId}": {
+      "schema": "LeaderboardEntry",
+      "description": "Top players and rankings."
+    }
+  }
+}
